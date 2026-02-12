@@ -1,0 +1,23 @@
+name: Deploy Frontend
+on:
+  push:
+    branches:
+      - production # This triggers the deploy when you push to this branch
+jobs:
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build React
+        run: |
+          cd frontend
+          npm install
+          npm run build
+      - name: Sync Frontend via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./frontend/dist/
+          server-dir: /public_html/
