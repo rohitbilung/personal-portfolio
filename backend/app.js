@@ -30,7 +30,7 @@ app.use(express.json());
 app.set('trust proxy', true);
 
 app.get('/', (req, res)=>{
-    res.send("server running fine!!")
+    res.send("server running fine!!!!!!, lets go")
 })
 
 const routeContact = require('./routes')
