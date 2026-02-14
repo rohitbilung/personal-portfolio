@@ -41,16 +41,22 @@ jobs:
             .git/**
             .github/**
             .env
-      - name: Create Restart Trigger
-        run: |
-          mkdir -p tmp
-          touch tmp/restart.txt
-
-      - name: Restart Node.js App
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: Remote SSH Commands (Install & Restart)
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./tmp/
-          server-dir: /home/redbilun/api.redbilung.in/tmp/
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            # Navigate to the app folder
+            cd /home/redbilun/api.redbilung.in/
+            
+            # Export the path so the system finds 'npm'
+            export PATH=$PATH:/usr/local/bin
+            
+            # Install production dependencies
+            npm install --production
+            
+            # Create/Update the restart file to trigger cPanel's Node manager
+            mkdir -p tmp
+            touch tmp/restart.txt
