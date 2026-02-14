@@ -28,12 +28,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Create Restart File Locally
-        run: |
-          cd backend
-          mkdir -p tmp
-          touch tmp/restart.txt
-
       - name: FTP Deploy Backend
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -41,7 +35,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./backend/ # Path to your Node files
-          server-dir: /home/redbilun/api.redbilung.in # The folder you set in cPanel Node Setup
+          server-dir: /home/redbilun/api.redbilung.in/ # The folder you set in cPanel Node Setup
           exclude: |
             node_modules/**
             .git/**
@@ -60,4 +54,4 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./tmp/
-          server-dir: /api.redbilung.in/tmp/
+          server-dir: /home/redbilun/api.redbilung.in/tmp/
