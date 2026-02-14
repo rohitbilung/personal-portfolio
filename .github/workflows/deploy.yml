@@ -41,22 +41,17 @@ jobs:
             .git/**
             .github/**
             .env
-      - name: Remote SSH Commands (Install & Restart)
-        uses: appleboy/ssh-action@v1.0.3
+
+      - name: Create and Upload Restart Trigger
+        run: |
+          mkdir -p tmp
+          touch tmp/restart.txt
+
+      - name: Upload Restart File
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          host: ${{ secrets.FTP_SERVER }}
+          server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
-          key: ${{ secrets.FTP_PASSWORD }}
-          script: |
-            # Navigate to the app folder
-            cd /home/redbilun/api.redbilung.in/
-            
-            # Export the path so the system finds 'npm'
-            export PATH=$PATH:/usr/local/bin
-            
-            # Install production dependencies
-            npm install --production
-            
-            # Create/Update the restart file to trigger cPanel's Node manager
-            mkdir -p tmp
-            touch tmp/restart.txt
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./tmp/
+          server-dir: /api.redbilung.in/tmp/
