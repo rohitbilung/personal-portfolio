@@ -1,0 +1,10 @@
+const app = require('./app')
+const http = require('http')
+require('dotenv').config();
+
+const port  = process.env.PORT || 5005
+
+let server = http.createServer(app);
+server.listen(port, ()=>{
+    console.log(`running on port http://localhost:${port}`)
+})
