@@ -37,6 +37,6 @@ module.exports = {
     },
 
     getMsg: async (req, res) => {
-        res.send("im working fine")
+        res.send("im working fine.....")
     }
 }
