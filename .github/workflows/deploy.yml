@@ -1,4 +1,4 @@
-name: Deploy Portfolio Frontend
+name: Deploy Portfolio Fully
 on:
   push:
     branches:
@@ -21,3 +21,33 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./frontend/dist/
           server-dir: /home/redbilun/public_html/
+
+  deploy-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: FTP Deploy Backend
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./backend/ # Path to your Node files
+          server-dir: /home/redbilun/api.redbilung.in # The folder you set in cPanel Node Setup
+          exclude: |
+            node_modules/**
+            .git/**
+            .github/**
+            .env
+
+      - name: Restart Node.js App
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          script: |
+            mkdir -p /home/redbilun/api.redbilung.in/my-api/tmp
+            touch /home/redbilun/api.redbilung.in/my-api/tmp/restart.txt
