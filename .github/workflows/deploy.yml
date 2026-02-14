@@ -49,5 +49,5 @@ jobs:
           username: ${{ secrets.USER }}
           password: ${{ secrets.PASSWORD }}
           script: |
-            cd ~/api.redbilung.in
+            cd ~/home/redbilun/api.redbilung.in
             touch tmp/restart.txt
