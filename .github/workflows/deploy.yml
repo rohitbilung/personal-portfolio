@@ -41,13 +41,16 @@ jobs:
             .git/**
             .github/**
             .env
+      - name: Create Restart Trigger
+        run: |
+          mkdir -p tmp
+          touch tmp/restart.txt
 
       - name: Restart Node.js App
-        uses: appleboy/ssh-action@v1.0.3
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           host: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          script: |
-            mkdir -p /home/redbilun/api.redbilung.in/my-api/tmp/
-            touch /home/redbilun/api.redbilung.in/my-api/tmp/restart.txt
+          local-dir: ./tmp/
+          server-dir: /home/redbilun/api.redbilung.in/tmp/
