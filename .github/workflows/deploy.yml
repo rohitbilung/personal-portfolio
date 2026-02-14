@@ -48,7 +48,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           password: ${{ secrets.PASSWORD }}
-          port: 2222
+          port: 2200
           script: |
             cd ~/api.redbilung.in
             touch tmp/restart.txt
