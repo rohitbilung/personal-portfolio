@@ -42,13 +42,11 @@ jobs:
             .github/**
             .env
 
-      - name: Upload Restart File
-        uses: appleboy/ssh-action@v1.0.3
+      - name: Trigger Restart
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          password: ${{ secrets.PASSWORD }}
-          port: 2083
-          script: |
-            cd ~/api.redbilung.in
-            touch tmp/restart.txt
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: restart/
+          server-dir: backend.yourdomain.com/tmp/
