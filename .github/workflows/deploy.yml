@@ -49,4 +49,4 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: restart/
-          server-dir: backend.yourdomain.com/tmp/
+          server-dir: /home/redbilun/api.redbilung.in/tmp/
