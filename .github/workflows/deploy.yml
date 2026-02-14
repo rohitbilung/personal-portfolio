@@ -49,5 +49,5 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./restart/
-          server-dir: /api.redbilung.in/tmp/
+          server-dir: /home/redbilun/api.redbilung.in/tmp/
           dangerous-clean-slate: true
