@@ -35,7 +35,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./backend/ # Path to your Node files
-          server-dir: /home/redbilun/api.redbilung.in # The folder you set in cPanel Node Setup
+          server-dir: /home/redbilun/api.redbilung.in/ # The folder you set in cPanel Node Setup
           exclude: |
             node_modules/**
             .git/**
