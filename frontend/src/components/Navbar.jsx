@@ -40,7 +40,7 @@ const Navbar = () => {
           {navLinks.map((link) => (
             <a key={link.name} href={link.href} className="text-gray-300 hover:text-primary transition">{link.name}</a>
           ))}
-          <a href="#contact" className="px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-dark transition">Hire Me</a>
+          <a href="#contact" className="px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-dark transition">Hireeee Me</a>
         </div>
 
         {/* Mobile Toggle */}
